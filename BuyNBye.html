@@ -1,1 +1,111 @@
-hello world
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<head>
+    <title>Buy N Bye at Airport</title>
+    <link rel="stylesheet" type="text/css" href="view.css">
+    <img src="banner.jpg" style="width:1300px; height:300px;" alt="Welcome to Buy and Bye">
+    </A>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="data.js"></script>
+    <script src="display.js"></script>
+</head>
+
+<body ng-app="BuyBye">
+    <div id="wrapper">
+    <div id='welcomeBanner' ng-controller="clockController">
+        <h4>Welcome to Buy N Bye. Time is {{ clock }} !</h4>
+    </div>
+<div class="w3-row-padding">
+    <div class="w3-third">
+    <div id="content" ng-controller="declareController">
+        <div id="inputCtrl">
+            <h4>To compare prices, enter a product name</h4>
+            <img src="product.png" style="height:30px; width:30px" alt="Product image">
+            <input ng-model="productname" type="text" placeholder="Enter a product name">
+
+            <h4>To list products at certain airport, enter an airport name </h4>
+            <img src="plane.png" style="height:30px; width:30px" alt="Airport image">
+            <input ng-model="airportname" type="text" placeholder="Enter airport name">
+            
+            <h4>To list products by category, select category from list </h4>
+            <img src="product.png" style="height:30px; width:30px" alt="Airport image">
+            <select ng-model="categoryvalue">
+                <option value="">-- choose category --</option>
+            <option value="Perfume">Perfume</option>
+            <option value="Fashion">Fashion</option>
+            </select>
+        </div>
+             </div>
+</div>
+        <div id="currencyCtrl" ng-controller="currencyController">
+            <div class="w3-row-padding">
+    <div class="w3-third">
+            <img src="currency.gif" style="display: block; margin: 0 auto;height:100px; width:100px; position:center" alt="Currency image">
+            <h2>Currency exchange rate </h2>
+            <p>To compare prices, enter the values in respective currency and result will be in USD as base value</p>
+            <input ng-model="pricevalue" value="0" type="text" placeholder=" Enter price value">
+            <select ng-model="currencyvalue" ng-options="opt as opt.label for opt in options">
+            </select>
+            <button ng-disabled="!pricevalue" ng-click="clickconvert()">Convert</button>
+            <h3>Result: It is equal to USD {{ convert | number : 2}}</h3>
+        </div>
+                         </div>
+</div>
+        <div id="resultCtrl" ng-controller="declareController">
+              <div class="w3-row-padding">
+    <div class="w3-third">
+            <h3>Search results: </h3>
+            <ul>
+                <li ng-repeat="product in product | filter:{name:productname, airportName: airportname, category:categoryvalue}">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="product/{{ product.id }}.jpg" alt="product picture">
+                            </td>
+                            <td>
+                                <h4>Product name: {{ product.name }}</h4>
+                                <p>Price: {{ product.currency}} {{ product.price }}</p>
+                                <p>Current available stock: {{ product.stock }}</p>
+                                <p>Category: {{ product.category }}</p>
+                                <p>Description: {{ product.description }}</p>
+                                <p>Shop: {{ product.shopname }} ( Operating hours: {{ product.operatinghour}} ) </p>
+                                <p>Location: {{ product.address }} , {{ product.airportName }} <button ng-click="showmap(product.index)" class="button alert">Show map</button></p>
+                                
+                                <input class="button" type="image" src="cart.gif" name="add to cart" ng-click="buyitem(product.index)">
+                                <br/>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+                                  </div>
+</div>
+        <div id="footer">
+                <div class="w3-row-padding">
+    <div class="w3-third">
+        <table>
+            <tr>
+                <td>
+                    <img src="logo.jpg" style="display: block; margin: 0 auto; height:60%; width:65%; position:center" alt="Company logo">
+                </td>
+                <td>
+                    <h2>Buy N Bye</h2>
+                    <p>Shop what you want at cheaper prices while travel!</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+        </div>
+                                           </div>
+</div>
+</body>
+<footer>
+    
+</footer>
+</div>
+</html>
+
